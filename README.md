@@ -35,7 +35,7 @@ The model folder contains Machine Learning pipeline. This folder should also con
 The whole folder structure of this Respository is as below:
 
 ###### app
-| - template \n
+| - template /n
 | |- master.html # main page of web app
 | |- go.html # classification result page of web app
 |- run.py # Flask file that runs app
