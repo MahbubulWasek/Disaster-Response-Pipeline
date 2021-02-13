@@ -82,6 +82,25 @@ def index():
             }
         },
         
+         # histogram of social media messages top 30 keywords 
+        {
+            'data': [
+                    Bar(
+                        x=social_media_wrds[:50],
+                        y=social_media_wrd_pct[:50]
+                                    )
+            ],
+
+            'layout':{
+                'title': "Top 50 Keywords in Social Media Messages",
+                'xaxis': {'tickangle':60
+                },
+                'yaxis': {
+                    'title': "% Total Social Media Messages"    
+                }
+            }
+        },
+        
         # histogram of messages categories distributions
         {
             'data': [
@@ -100,25 +119,6 @@ def index():
                 }
             }
         },   
-        
-        # histogram of social media messages top 30 keywords 
-        {
-            'data': [
-                    Bar(
-                        x=social_media_wrds[:50],
-                        y=social_media_wrd_pct[:50]
-                                    )
-            ],
-
-            'layout':{
-                'title': "Top 50 Keywords in Social Media Messages",
-                'xaxis': {'tickangle':60
-                },
-                'yaxis': {
-                    'title': "% Total Social Media Messages"    
-                }
-            }
-        },
     ]
     
     # encode plotly graphs in JSON
