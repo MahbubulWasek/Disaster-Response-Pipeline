@@ -26,6 +26,17 @@ from sklearn.naive_bayes import MultinomialNB
 import joblib
 
 def load_data(database_filepath):
+    
+    """
+        Load data from the sqlite database. 
+    Args: 
+        database_filepath: the path of the database file
+    Returns: 
+        X (DataFrame): messages 
+        Y (DataFrame): One-hot encoded categories
+        category_names (List)
+    """
+    
     # load data from database
     # Create connection to database
     engine = create_engine('sqlite:///data/DisasterResponses.db')
@@ -44,7 +55,18 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
-
+    """
+    Clean the dataset- detect and find url regular expressions, tokenize text, lemmatize text 
+    and remove stopwords
+    Args:
+    url_regex: Regular url expressions
+    detected_urls: finding all url expressions
+    tokens: tokenized words
+    lemmatizer: Lemmatizing text
+    Return:
+    Clean tokens
+    """
+    
     #Detect url 
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     
@@ -74,6 +96,16 @@ def tokenize(text):
 
 
 def build_model():
+    
+    """
+      build NLP pipeline - count words, tf-idf, multiple output classifier,
+      grid search the best parameters
+    Args: 
+        None
+    Returns: 
+        cross validated classifier object
+    """   
+    
  # specify parameters for grid search
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -91,6 +123,17 @@ def build_model():
 
 def evaluate_model(model, X_test, Y_test, category_names):
     
+    """
+        Evaluate the model performances, in terms of f1-score, precison and recall
+    Args: 
+        model: the model to be evaluated
+        X_test: X_test dataframe
+        Y_test: Y_test dataframe
+        category_names: category names list defined in load data
+    Returns: 
+        perfomances (DataFrame)
+    """   
+    
     y_pred = model.predict(X_test)
     
     for i, col in enumerate(category_names):
@@ -106,6 +149,10 @@ def evaluate_model(model, X_test, Y_test, category_names):
     return
 
 def save_model(model, model_filepath):
+    
+    """
+        Save model to pickle
+    """
     
     joblib.dump(model, open(model_filepath, 'wb'))
 
