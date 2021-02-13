@@ -53,7 +53,7 @@ def save_data(df, database_filename):
     
     engine = create_engine('sqlite:///data/DisasterResponses.db')
 
-    df.to_sql('tables', engine, index=False) 
+    df.to_sql('tables', engine, if_exists='replace', index=False) 
 
 
 def main():
