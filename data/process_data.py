@@ -5,6 +5,16 @@ import sqlite3
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    
+    """
+        Load data from the csv. 
+    Args: 
+        messages_filepath: the path of the messages.csv files that needs to be transferred
+        categories_filepath: the path of the categories.csv files that needs to be transferred
+    Returns: 
+        merged_df (DataFrame): messages and categories merged dataframe
+    """
+    
     # load messages dataset
     messages = pd.read_csv('data/disaster_messages.csv')
     # load categories dataset
@@ -17,6 +27,17 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    
+     """
+        Clean the unstructured merged dataframe into structured dataframes. 
+        1. Rename columns of different categories
+        2. Remove Duplicates
+    Args: 
+        df: The preprocessed dataframe
+    Returns: 
+        df (DataFrame): messages and categories merged dataframe
+    """
+    
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(";", expand=True)
     
