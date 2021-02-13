@@ -30,7 +30,25 @@ There are 2 datasets used here provided by Figure Eight.  The raw files for each
 
 The files are to be organized the way they are currently to run properly. The data folder contains the 2 datasets along with the ETL Pipeline.
 
-The model folder contains Machine Learning pipeline. This folder should also contain the classifier model pipeline. However, the file size was too large to upload.
+The model folder contains Machine Learning pipeline. This folder should also contain the classifier.pkl model pipeline. However, the file size was too large to upload.
+
+The whole folder structure of this Respository is as below:
+
+> app
+| - template
+| |- master.html # main page of web app
+| |- go.html # classification result page of web app
+|- run.py # Flask file that runs app
+
+> data
+|- disaster_categories.csv # data to process
+|- disaster_messages.csv # data to process
+|- process_data.py
+|- InsertDatabaseName.db # database to save clean data to
+
+> models
+|- train_classifier.py
+|- classifier.pkl # saved model
 
 ## Results<a name="results"></a>
 
