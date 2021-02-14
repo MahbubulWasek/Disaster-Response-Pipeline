@@ -132,19 +132,11 @@ def evaluate_model(model, X_test, Y_test, category_names):
         category_names: category names list defined in load data
     Returns: 
         perfomances (DataFrame)
-    """   
+    """  
     
     y_pred = model.predict(X_test)
     
-    for i, col in enumerate(category_names):
-    # if i in [0, 9]: continue  # Skip bad column, TODO: Fix 0th column to not be 3 classes for no reason
-    
-         print("Column {}: {}".format(i, col))
-    
-         Y_true = list(Y_test.values[:, i])
-         Y_pred = list(y_pred[:, i])
-         target_names = ['is_{}'.format(col), 'is_not_{}'.format(col)]
-         print(classification_report(Y_true, Y_pred, target_names=target_names))
+    print(classification_report(Y_test, pd.DataFrame(y_pred, columns=Y_test.columns), target_names=category_names))
 
     return
 
